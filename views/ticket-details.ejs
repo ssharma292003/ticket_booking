@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        .total {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Confirmation</h1>
+        
+        <div class="info">
+            <p>Movie Name</p>
+            <h1><%= movie_name %></h1>
+            
+        </div>
+
+        <div class="info">
+            <p>Show Time</p>
+            <h1><%= time %></h1>
+        </div>
+
+        <div class="info">
+            <p>Show Type</p>
+            <h1><%= show %></h1>
+        </div>
+
+        <div class="info">
+            <p>Number of Persons</p>
+            <h1><%= count %></h1>
+        </div>
+
+        <div class="info">
+            <p>Price per Ticket</p>
+            <h1> <%= price %>/-</h1>
+        </div>
+
+        <div class="total">
+            <h1>Total:  <%= totalprice %>/-</h1>
+        </div>
+    </div>
+</body>
+</html>
