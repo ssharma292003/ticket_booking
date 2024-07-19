@@ -9,8 +9,7 @@ const db = require('./db');
 app.set('view engine', 'ejs');
 
 // Middleware to parse incoming request bodies
-app.use(express.urlencoded({ extended: false }));
-
+app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 // Establish database connection
 const con = db();
 
@@ -89,4 +88,7 @@ app.post('/booking', (req, res) => {
 });
 
 // Start the server
-module.exports = app;
+const port = 2000;
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
