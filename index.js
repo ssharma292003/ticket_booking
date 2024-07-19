@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const db = require('./db');
 
 // Set EJS as the template engine
