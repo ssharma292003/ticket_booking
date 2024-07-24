@@ -1,5 +1,5 @@
 // index.js
-
+require('dotenv').config(); 
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -8,9 +8,13 @@ const db = require('./db');
 
 // Set EJS as the template engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
 
 // Middleware to parse incoming request bodies
-app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 // Establish database connection
 const con = db();
 
@@ -29,7 +33,7 @@ app.get('/booking', (req, res) => {
 });
 
 // Route to handle form submission (buy ticket)
-app.post('/booking', (req, res) => {
+app.post('/booking', async(req, res) => {
     const movie = req.body.movie;
     const selectedTime = req.body.showtime; // Get the selected showtime from the form submission
     const show = req.body.time;
@@ -66,22 +70,25 @@ app.post('/booking', (req, res) => {
         // Insert booking details into the database
         const query = `INSERT INTO BOOKINGS (MOVIE_NAME, PEOPLE, PRICE, SHOW_TIME, TIME, TOTAL_PRICE) VALUES ('${movie}', ${count}, ${price}, '${show}', '${selectedTime}', ${totalprice})`;
 
+        // con.query(query);
         con.query(query, (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send('Error booking the ticket');
-            } else {
+            if(err){
+                res.send(err);
+            }else{
                 console.log('Booking successful');
+                
                 // Render ticket details page with booking information
-                res.render('ticket-details', {
-                    movie_name: movie,
-                    time: selectedTime,
-                    show: show,
-                    price: price,
-                    totalprice: totalprice,
-                    count: count
-                });
+                // res.render('ticket-details', {
+                //     movie_name: movie,
+                //     time: selectedTime,
+                //     show: show,
+                //     price: price,
+                //     totalprice: totalprice,
+                //     count: count,
+                // });
+                res.send(db.conID);
             }
+            
         });
     } else {
         res.send("Please select a time");
